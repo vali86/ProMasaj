@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProMasaj"
         xmlns:DbMasajModel="clr-namespace:DbMasajModel;assembly=DbMasajModel" x:Class="ProMasaj.MainWindow"
         mc:Ignorable="d"
-        Title="Centru de terapie si masaj AVA" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Centru de terapie si masaj AVA" Height="450" Width="850" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="clientViewSource" d:DesignSource="{d:DesignInstance {x:Type DbMasajModel:Client}, CreateList=True}"/>
         <CollectionViewSource x:Key="angajatViewSource" d:DesignSource="{d:DesignInstance {x:Type DbMasajModel:Angajat}, CreateList=True}"/>
@@ -30,10 +30,11 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <TabControl x:Name="tbCtrlDbMasaj" HorizontalAlignment="Left" Height="373" Margin="159,18,0,0" VerticalAlignment="Top" Width="605">
+        <Image Source="depositphotos_26820715-stock-photo-white-wood-background.jpg" Stretch="Fill"/>
+        <TabControl x:Name="tbCtrlDbMasaj" HorizontalAlignment="Left" Height="373" Margin="159,18,0,0" VerticalAlignment="Top" Width="650">
             <TabItem Header="Programare">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource programareViewSource}">
-                    <ComboBox x:Name="cmbClient" HorizontalAlignment="Left" Margin="183,41,0,0" VerticalAlignment="Top" Width="120" 
+                <Grid Background="#007b99" DataContext="{StaticResource programareViewSource}">
+                    <ComboBox x:Name="cmbClient" HorizontalAlignment="Left" Margin="183,41,0,0" VerticalAlignment="Top" Width="161" 
                               SelectedValue="{Binding ElementName=programareDataGrid,Path=SelectedItem.ClientId,Mode=OneWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -48,7 +49,7 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <ComboBox x:Name="cmbAngajat" HorizontalAlignment="Left" Margin="377,41,0,0" VerticalAlignment="Top" Width="120"
+                    <ComboBox x:Name="cmbAngajat" HorizontalAlignment="Left" Margin="377,41,0,0" VerticalAlignment="Top" Width="169"
                               SelectedValue="{Binding ElementName=programareDataGrid,Path=SelectedItem.AngajatId,Mode=OneWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -63,35 +64,38 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <ComboBox x:Name="cmbMasaj" HorizontalAlignment="Left" Margin="183,104,0,0" VerticalAlignment="Top" Width="120"/>
-                    <ComboBox x:Name="cmbSala" HorizontalAlignment="Left" Margin="377,104,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Client" HorizontalAlignment="Left" Margin="183,15,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Angajat" HorizontalAlignment="Left" Margin="377,15,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Masaj" HorizontalAlignment="Left" Margin="183,78,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Sala" HorizontalAlignment="Left" Margin="377,78,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="cmbMasaj" HorizontalAlignment="Left" Margin="183,118,0,0" VerticalAlignment="Top" Width="161"
+                              SelectedValue="{Binding ElementName=programareDataGrid,Path=SelectedItem.MasajId,Mode=OneWay}"/>
+                    <ComboBox x:Name="cmbSala" HorizontalAlignment="Left" Margin="377,118,0,0" VerticalAlignment="Top" Width="169"
+                              SelectedValue="{Binding ElementName=programareDataGrid,Path=SelectedItem.SalaId,Mode=OneWay}"/>
+                    <Label Content="Client" HorizontalAlignment="Left" Margin="183,15,0,0" VerticalAlignment="Top" Width="120" Foreground="White" FontWeight="Bold"/>
+                    <Label Content="Angajat" HorizontalAlignment="Left" Margin="377,15,0,0" VerticalAlignment="Top" Width="120" Foreground="White" FontWeight="Bold"/>
+                    <Label Content="Masaj" HorizontalAlignment="Left" Margin="183,92,0,0" VerticalAlignment="Top" Width="120" Foreground="White" FontWeight="Bold"/>
+                    <Label Content="Sala" HorizontalAlignment="Left" Margin="377,92,0,0" VerticalAlignment="Top" Width="120" Foreground="White" FontWeight="Bold"/>
                     <DataGrid x:Name="programareDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,174,10,30" RowDetailsVisibilityMode="VisibleWhenSelected"  IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="programareIdColumn" Binding="{Binding ProgramareId}" Header="Programare Id" Width="SizeToHeader"/>
-                            <DataGridTemplateColumn x:Name="oraColumn" Header="Ora" Width="SizeToHeader">
+                            <DataGridTextColumn x:Name="programareIdColumn" Binding="{Binding ProgramareId}" Header="Progr Id" Width="SizeToHeader"/>
+                            <DataGridTemplateColumn x:Name="oraColumn" Header="Data" Width="95">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <DatePicker SelectedDate="{Binding Ora, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn x:Name="angajatIdColumn2" Binding="{Binding Nume}" Header="Nume Angajat" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="angajatIdColumn3" Binding="{Binding Prenume}" Header="Prenume Angajat" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="clientIdColumn1" Binding="{Binding ClientId}" Header="ClientId" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="masajIdColumn1" Binding="{Binding Denumire}" Header="Denumire" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="salaIdColumn1" Binding="{Binding Strada}" Header="Sala" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="angajatIdColumn2" Binding="{Binding Nume}" Header="Nume Cl" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="angajatIdColumn3" Binding="{Binding Prenume}" Header="Prenume Cl" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="clientIdColumn1" Binding="{Binding AngajatId}" Header="AngId" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="masajIdColumn1" Binding="{Binding Denumire}" Header="Denumire" Width="150"/>
+                            <DataGridTextColumn x:Name="salaIdColumn1" Binding="{Binding Strada}" Header="Sala" Width="70"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DatePicker HorizontalAlignment="Left" Margin="57,47,0,0" VerticalAlignment="Top" Height="25" Width="99"/>
-                    <Label Content="Ora" HorizontalAlignment="Left" Margin="57,15,0,0" VerticalAlignment="Top" Width="99"/>
+                    <DatePicker x:Name="oraDatePicker" HorizontalAlignment="Left" Margin="57,47,0,0" VerticalAlignment="Top" Height="25" Width="99"/>
+                    <Label Content="Data"  HorizontalAlignment="Left" Margin="57,21,0,0" VerticalAlignment="Top" Width="99" Foreground="White" FontWeight="Bold"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Client">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource clientViewSource}">
+                <Grid Background="#007b99" DataContext="{StaticResource clientViewSource}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="135*"/>
                         <ColumnDefinition Width="464*"/>
@@ -118,25 +122,23 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Client Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <Label Content="Client Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                         <TextBox x:Name="clientIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding ClientId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
-                        <Label Content="Email:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                        <TextBox x:Name="emailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Nr Telefon:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                        <TextBox x:Name="nrTelefonTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding NrTelefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Nume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                        <TextBox x:Name="numeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Nume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Validation.ErrorTemplate="{StaticResource validationTemplate}"
-Style="{StaticResource textBoxInError}" />
-                        <Label Content="Prenume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                        <TextBox x:Name="prenumeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Prenume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Validation.ErrorTemplate="{StaticResource validationTemplate}"
-Style="{StaticResource textBoxInError}" />
+                        <Label Content="Email:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="emailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Nr Telefon:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="nrTelefonTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding NrTelefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Nume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="numeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Nume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"/>
+                        <Label Content="Prenume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="prenumeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Prenume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}"/>
                     </Grid>
-                    <Button x:Name="btnPreviousClient" Button.Click="btnPreviousClient_Click" Content="Previous" HorizontalAlignment="Left" Margin="11.396,137,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
-                    <Button x:Name="btnNextClient" Button.Click="btnNextClient_Click" Content="Next" HorizontalAlignment="Left" Margin="243.396,142,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                    <Button x:Name="btnPreviousClient" Button.Click="btnPreviousClient_Click" Content="Previous" HorizontalAlignment="Left" Margin="11.396,137,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Background="White" FontWeight="Bold"/>
+                    <Button x:Name="btnNextClient" Button.Click="btnNextClient_Click" Content="Next" HorizontalAlignment="Left" Margin="243,137,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Background="White" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Angajat">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource angajatViewSource}">
+                <Grid Background="#007b99" DataContext="{StaticResource angajatViewSource}">
                     <DataGrid x:Name="angajatDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="81,20,91,219" RowDetailsVisibilityMode="VisibleWhenSelected">
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="angajatIdColumn" Binding="{Binding AngajatId}" Header="Angajat Id" Width="SizeToHeader"/>
@@ -158,23 +160,23 @@ Style="{StaticResource textBoxInError}" />
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Angajat Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <Label Content="Angajat Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                         <TextBox x:Name="angajatIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding AngajatId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
-                        <Label Content="Nr Telefon:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                        <TextBox x:Name="nrTelefonTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding NrTelefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Nume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                        <TextBox x:Name="numeTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Nume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Prenume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                        <TextBox x:Name="prenumeTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Prenume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Salariu:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                        <Label Content="Nr Telefon:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="nrTelefonTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding NrTelefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Nume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="numeTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Nume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Prenume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="prenumeTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Prenume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Salariu:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                         <TextBox x:Name="salariuTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Salariu, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                     </Grid>
-                    <Button x:Name="btnPreviousAngajat" Button.Click="btnPreviousAngajat_Click" Content="Previous" HorizontalAlignment="Left" Margin="139,131,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button x:Name="btnNextAngajat" Button.Click="btnNextAngajat_Click" Content="Next" HorizontalAlignment="Left" Margin="385,131,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="btnPreviousAngajat" Button.Click="btnPreviousAngajat_Click" Content="Previous" HorizontalAlignment="Left" Margin="139,131,0,0" VerticalAlignment="Top" Width="75" Background="White" FontWeight="Bold"/>
+                    <Button x:Name="btnNextAngajat" Button.Click="btnNextAngajat_Click" Content="Next" HorizontalAlignment="Left" Margin="385,131,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Background="White"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Masaj">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource masajViewSource}">
+                <Grid Background="#007b99" DataContext="{StaticResource masajViewSource}">
                     <DataGrid x:Name="masajDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="100,20,100,209" RowDetailsVisibilityMode="VisibleWhenSelected">
                         <DataGrid.Columns>
 
@@ -196,21 +198,21 @@ Style="{StaticResource textBoxInError}" />
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Denumire:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                        <TextBox x:Name="denumireTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Denumire, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Durata:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                        <TextBox x:Name="durataTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Durata, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Masaj Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                        <TextBox x:Name="masajIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding MasajId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
-                        <Label Content="Pret:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                        <TextBox x:Name="pretTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Pret, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Denumire:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="denumireTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Denumire, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Durata:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="durataTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Durata, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Masaj Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="masajIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding MasajId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+                        <Label Content="Pret:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="pretTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Pret, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                     </Grid>
-                    <Button x:Name="btnPreviousMasaj" Button.Click="btnPreviousMasaj_Click" Content="Previous" HorizontalAlignment="Left" Margin="181,141,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button x:Name="btnNextMasaj" Button.Click="btnNextMasaj_Click" Content="Next" HorizontalAlignment="Left" Margin="342,141,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="btnPreviousMasaj" Button.Click="btnPreviousMasaj_Click" Content="Previous" HorizontalAlignment="Left" Margin="181,141,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Background="White"/>
+                    <Button x:Name="btnNextMasaj" Button.Click="btnNextMasaj_Click" Content="Next" HorizontalAlignment="Left" Margin="342,141,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Background="White"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Sala">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource salaViewSource}">
+                <Grid Background="#007b99" DataContext="{StaticResource salaViewSource}">
                     <DataGrid x:Name="salaDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="99,21,79,213" RowDetailsVisibilityMode="VisibleWhenSelected">
                         <DataGrid.Columns>
 
@@ -234,36 +236,37 @@ Style="{StaticResource textBoxInError}" />
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Angajat Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                        <TextBox x:Name="angajatIdTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding AngajatId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Etaj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                        <TextBox x:Name="etajTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Etaj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Numar:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                        <Label Content="Angajat Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="angajatIdTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding AngajatId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Etaj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="etajTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Etaj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Numar:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                         <TextBox x:Name="numarTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Numar, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        <Label Content="Sala Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                        <TextBox x:Name="salaIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding SalaId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
-                        <Label Content="Strada:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                        <TextBox x:Name="stradaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Strada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Sala Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="salaIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding SalaId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
+                        <Label Content="Strada:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                        <TextBox x:Name="stradaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Strada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                     </Grid>
-                    <Button x:Name="btnPreviousSala" Button.Click="btnPreviousSala_Click" Content="Previous" HorizontalAlignment="Left" Margin="165,137,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button x:Name="btnNextSala" Button.Click="btnNextSala_Click" Content="Next" HorizontalAlignment="Left" Margin="357,137,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="btnPreviousSala" Button.Click="btnPreviousSala_Click" Content="Previous" HorizontalAlignment="Left" Margin="165,137,0,0" VerticalAlignment="Top" Width="75" Background="White" FontWeight="Bold"/>
+                    <Button x:Name="btnNextSala" Button.Click="btnNextSala_Click" Content="Next" HorizontalAlignment="Left" Margin="357,137,0,0" VerticalAlignment="Top" Width="75" Background="White" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
-
+          
         </TabControl>
+
         <GroupBox x:Name="gbOperations" Button.Click="gbOperations_Click" Header="" HorizontalAlignment="Left" Height="83" Margin="18,68,0,0" VerticalAlignment="Top" Width="112">
             <StackPanel x:Name="spOperations" HorizontalAlignment="Left" Height="73" Margin="0,0,0,-13" VerticalAlignment="Top" Width="100">
                 <StackPanel Height="60">
-                    <Button x:Name="btnAdd" Button.Click="btnAdd_Click" Content="Add"/>
-                    <Button x:Name="btnEdit" Button.Click="btnEdit_Click" Content="Edit"/>
-                    <Button x:Name="btnDelete" Button.Click="btnDelete_Click" Content="Delete"/>
+                    <Button x:Name="btnAdd" Background="#007b99" Button.Click="btnAdd_Click" Content="Add" Foreground="White" FontWeight="Bold"/>
+                    <Button x:Name="btnEdit" Background="#007b99" Button.Click="btnEdit_Click" Content="Edit" Foreground="White" FontWeight="Bold"/>
+                    <Button x:Name="btnDelete" Background="#007b99" Button.Click="btnDelete_Click" Content="Delete" Foreground="White" FontWeight="Bold"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="gbActions" Header="" HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="115" Margin="23,265,0,0">
+        <GroupBox x:Name="gbActions" Header="" HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="115" Margin="23,265,0,0" IsEnabled="False">
             <StackPanel x:Name="spActions" HorizontalAlignment="Left" Height="43" VerticalAlignment="Top" Width="100">
                 <StackPanel Height="41">
-                    <Button x:Name="btnSave" Button.Click="btnSave_Click" Content="Save"  >
+                    <Button x:Name="btnSave" Background="#13507d" Button.Click="btnSave_Click" Content="Save" Foreground="White" FontWeight="Bold"  >
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="IsEnabled" Value="false" />
@@ -279,10 +282,11 @@ Style="{StaticResource textBoxInError}" />
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button x:Name="btnCancel"  Button.Click="btnCancel_Click" Content="Cancel"/>
+                    <Button x:Name="btnCancel"  Background="#13507d" Button.Click="btnCancel_Click" Content="Cancel" Foreground="White" FontWeight="Bold"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
+
 
     </Grid>
 </Window>

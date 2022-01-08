@@ -430,7 +430,7 @@ namespace ProMasaj
                     //instantiem programare entity
                     programare = new Programare()
                     {
-
+                        Ora = oraDatePicker.DisplayDate,
                         ClientId = client.ClientId,
                         AngajatId = angajat.AngajatId,
                         MasajId = masaj.MasajId,
@@ -447,13 +447,16 @@ namespace ProMasaj
                     MessageBox.Show(ex.Message);
                 }
             }
-            else if (action == ActionState.Edit)
+            else 
+            if (action == ActionState.Edit)
             {
                 dynamic selectedProgramare = programareDataGrid.SelectedItem;
                 try
                 {
+                    programare.Ora = oraDatePicker.DisplayDate;
                     int curr_id = selectedProgramare.ProgramareId;
                     var editedProgramare = ctx.Programares.FirstOrDefault(s => s.ProgramareId == curr_id);
+                   
                     if (editedProgramare != null)
                     {
                         editedProgramare.ClientId = Int32.Parse(cmbClient.SelectedValue.ToString());
@@ -479,13 +482,13 @@ namespace ProMasaj
                 try
                 {
                     dynamic selectedProgramare = programareDataGrid.SelectedItem;
-                    int curr_id = selectedProgramare.programareId;
+                    int curr_id = selectedProgramare.ProgramareId;
                     var deletedProgramare = ctx.Programares.FirstOrDefault(s => s.ProgramareId == curr_id);
                     if (deletedProgramare != null)
                     {
                         ctx.Programares.Remove(deletedProgramare);
                         ctx.SaveChanges();
-                        MessageBox.Show("Programare Deleted Successfully", "Message");
+                        MessageBox.Show("Programarea a fost stearsa cu succes!", "Message");
                         BindDataGrid();
                     }
                 }
@@ -527,24 +530,19 @@ namespace ProMasaj
             numeValidationBinding.Path = new PropertyPath("Nume");
             numeValidationBinding.NotifyOnValidationError = true;
             numeValidationBinding.Mode = BindingMode.TwoWay;
-            numeValidationBinding.UpdateSourceTrigger =
-           UpdateSourceTrigger.PropertyChanged;
+            numeValidationBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
             //string required
             numeValidationBinding.ValidationRules.Add(new StringNotEmpty());
-            numeTextBox.SetBinding(TextBox.TextProperty,
-           numeValidationBinding);
+            numeTextBox.SetBinding(TextBox.TextProperty, numeValidationBinding);
             Binding prenumeValidationBinding = new Binding();
             prenumeValidationBinding.Source = clientVSource;
             prenumeValidationBinding.Path = new PropertyPath("Prenume");
             prenumeValidationBinding.NotifyOnValidationError = true;
             prenumeValidationBinding.Mode = BindingMode.TwoWay;
-            prenumeValidationBinding.UpdateSourceTrigger =
-           UpdateSourceTrigger.PropertyChanged;
+            prenumeValidationBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
             //string min length validator
-            prenumeValidationBinding.ValidationRules.Add(new
-           StringMinLengthValidator());
-            prenumeTextBox.SetBinding(TextBox.TextProperty,
-           prenumeValidationBinding); //setare binding nou
+            prenumeValidationBinding.ValidationRules.Add(new StringMinLengthValidator());
+            prenumeTextBox.SetBinding(TextBox.TextProperty, prenumeValidationBinding); //setare binding nou
         }
 
 

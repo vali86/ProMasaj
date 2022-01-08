@@ -139,6 +139,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="depositphotos_26820715-stock-photo-white-wood-background.jpg" />
+    <Resource Include="Blue-Flower-Illustration-PNG.png" />
+    <Resource Include="Blue-Flower-Illustration-PNG - Copy %283%29.png" />
     <Content Include="DbMasaj.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -146,6 +149,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>DbMasaj.mdf</DependentUpon>
     </Content>
+    <Resource Include="kissclipart-cornflower-drawing-f32d5841e8ede7bb.png" />
     <Resource Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
